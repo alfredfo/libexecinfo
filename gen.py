@@ -30,7 +30,7 @@ PROLOGUE = '\nvoid *\nget%saddr(int level)\n{\n\n    switch(level) {'
 BODY = '    case %d: return __builtin_%s_address(%d);'
 EPILOGUE = '    default: return NULL;\n    }\n}'
 
-MAXDEPTH = 128
+MAXDEPTH = 256
 
 def gen(name, maxnum):
 	print(PROLOGUE % name)
