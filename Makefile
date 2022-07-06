@@ -28,6 +28,7 @@
 
 CC ?= clang
 AR ?= ar
+PYTHON ?= python
 EXECINFO_CFLAGS=$(CFLAGS) -O2 -pipe -fno-strict-aliasing -std=gnu99 -fstack-protector -c
 EXECINFO_LDFLAGS=$(LDFLAGS)
 
@@ -50,15 +51,18 @@ install: libexecinfo.a libexecinfo.so.1
 	install -d $(DESTDIR)$(INCLUDEDIR)
 	install -m 755 execinfo.h       $(DESTDIR)$(INCLUDEDIR)
 	install -m 755 stacktraverse.h  $(DESTDIR)$(INCLUDEDIR)
-	
+
 	install -d $(DESTDIR)$(LIBDIR)
 	install -m 755 libexecinfo.a    $(DESTDIR)$(LIBDIR)
 	install -m 755 libexecinfo.so.1 $(DESTDIR)$(LIBDIR)
-	
+
 	ln -s /usr/lib/libexecinfo.so.1 $(DESTDIR)$(LIBDIR)/libexecinfo.so
 clean:
 	rm -rf *.o *.So *.a *.so *.so.1
+setup:
+	$(PYTHON) gen.py > stacktrace.c
 
 .PHONY: all
 .PHONY: install
 .PHONY: clean
+.PHONY: setup
