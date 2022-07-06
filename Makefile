@@ -32,8 +32,8 @@ PYTHON ?= python
 EXECINFO_CFLAGS=$(CFLAGS) -O2 -pipe -fno-strict-aliasing -std=gnu99 -fstack-protector -c
 EXECINFO_LDFLAGS=$(LDFLAGS)
 
-INCLUDEDIR ?= /usr/include
-LIBDIR ?= /usr/lib
+INCLUDEDIR ?= /usr/local/include
+LIBDIR ?= /usr/local/lib
 
 all: libexecinfo.a libexecinfo.so.1
 
@@ -57,6 +57,7 @@ install: libexecinfo.a libexecinfo.so.1
 	install -m 755 libexecinfo.so.1 $(DESTDIR)$(LIBDIR)
 
 	ln -s /usr/lib/libexecinfo.so.1 $(DESTDIR)$(LIBDIR)/libexecinfo.so
+	install -m 644 libexecinfo.pc $(DESTDIR)$(LIBDIR)/pkgconfig
 clean:
 	rm -rf *.o *.So *.a *.so *.so.1
 setup:

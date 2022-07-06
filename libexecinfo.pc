@@ -1,7 +1,7 @@
-prefix=/usr
+prefix=/usr/local
 exec_prefix=${prefix}
 includedir=${prefix}/include
-libdir=${exec_prefix}/lib
+libdir=/usr/local/lib
 
 Name: libexecinfo
 Description: Clone of backtrace facility found in glibc
