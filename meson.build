@@ -13,7 +13,7 @@ stacktraverse_c = custom_target(
 stacktraverse = static_library('stacktraverse', stacktraverse_c)
 execinfo = library('execinfo', 'execinfo.c',
                    link_with : stacktraverse, install : true)
+install_headers('execinfo.h')
 
 pkg.generate(execinfo,
              description : 'Clone of the backtrace facility found in glibc')
-
