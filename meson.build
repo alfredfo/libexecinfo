@@ -1,7 +1,16 @@
 project('execinfo', 'c', version : '1.0.0')
-pkg = import('pkgconfig')
 
-stacktraverse = static_library('stacktraverse', 'stacktraverse.c')
+pkg = import('pkgconfig')
+prog_python = import('python').find_installation('python3')
+
+stacktraverse_c = custom_target(
+  'stacktraverse.c',
+  output : 'stacktraverse.c',
+  input : 'gen.py',
+  command : [prog_python, '@INPUT@', '256'],
+)
+
+stacktraverse = static_library('stacktraverse', stacktraverse_c)
 execinfo = library('execinfo', 'execinfo.c',
                    link_with : stacktraverse, install : true)
 
