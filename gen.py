@@ -26,18 +26,18 @@
 #
 # $Id: gen.py,v 1.1 2003/08/10 14:47:54 sobomax Exp $
 
-PROLOGUE = '#include <stddef.h>\n\n#include "stacktraverse.h"\n\nvoid *\nget%saddr(int level)\n{\n\n    switch(level) {'
+PROLOGUE = '\nvoid *\nget%saddr(int level)\n{\n\n    switch(level) {'
 BODY = '    case %d: return __builtin_%s_address(%d);'
 EPILOGUE = '    default: return NULL;\n    }\n}'
 
 MAXDEPTH = 128
 
 def gen(name, maxnum):
-	print PROLOGUE % name
+	print(PROLOGUE % name)
 	for i in range(0, maxnum):
-		print BODY % (i, name, i + 1)
-	print EPILOGUE
-
+		print(BODY % (i, name, i + 1))
+	print(EPILOGUE)
+print('#define _GNU_SOURCE\n\n#include <stddef.h>\n\n#include "stacktraverse.h"')
 gen("return", MAXDEPTH)
-print ''
+print('')
 gen("frame", MAXDEPTH)

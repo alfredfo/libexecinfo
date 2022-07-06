@@ -1,4 +1,5 @@
 #define _GNU_SOURCE
+
 #include <stddef.h>
 
 #include "stacktraverse.h"
@@ -140,9 +141,6 @@ getreturnaddr(int level)
     }
 }
 
-#include <stddef.h>
-
-#include "stacktraverse.h"
 
 void *
 getframeaddr(int level)
